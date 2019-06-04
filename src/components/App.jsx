@@ -11,7 +11,7 @@ import Header from './Header';
 class App extends Component {
 	render() {
 		return (
-			<div className="ui container">
+			<div className="container">
 				<BrowserRouter>
 					<Header />
 					<div>

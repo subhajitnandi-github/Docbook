@@ -6,17 +6,21 @@ import GoogleAuth from './GoogleAuth';
 class Header extends React.Component {
 	render() {
 		return (
-			<div className="ui secondary pointing menu">
-				<Link to="/" className="item">
+			<nav className="navbar navbar-dark bg-dark">
+				<Link to="/" className="navbar-brand">
 					Streamy
 				</Link>
-				<div className="right menu">
-					<Link to="/" className="item">
-						All Streams
-					</Link>
-					<GoogleAuth />
-				</div>
-			</div>
+				<ul className="navbar-nav">
+					<div className="mr-sm-2">
+						<li className="nav-item active mr-sm-5">
+							<Link to="/" className="nav-link">
+								All Streams
+							</Link>
+						</li>
+						<GoogleAuth />
+					</div>
+				</ul>
+			</nav>
 		);
 	}
 }
