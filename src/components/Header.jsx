@@ -11,15 +11,13 @@ class Header extends React.Component {
 					Streamy
 				</Link>
 				<ul className="navbar-nav">
-					<div className="mr-sm-2">
-						<li className="nav-item active mr-sm-5">
-							<Link to="/" className="nav-link">
-								All Streams
-							</Link>
-						</li>
-						<GoogleAuth />
-					</div>
+					<li className="nav-item active">
+						<Link to="/" className="nav-link">
+							All Streams
+						</Link>
+					</li>
 				</ul>
+				<GoogleAuth />
 			</nav>
 		);
 	}
