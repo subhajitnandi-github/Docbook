@@ -1,13 +1,13 @@
 import {
 	SIGN_IN,
 	SIGN_OUT,
-	CREATE_STREAM,
-	FETCH_STREAM,
-	EDIT_STREAM,
-	DELETE_STREAM,
-	FETCH_STREAMS
+	CREATE_DOCUMENT,
+	FETCH_DOCUMENT,
+	EDIT_DOCUMENT,
+	DELETE_DOCUMENT,
+	FETCH_DOCUMENTS
 } from './types'
-import streamyApi from '../apis/streamyApi'
+import docbookApi from '../apis/docbookApi'
 import history from '../history'
 
 export const SignIn = userId => {
@@ -23,56 +23,56 @@ export const SignOut = () => {
 	}
 }
 
-export const createStream = formValues => {
+export const createDocument = formValues => {
 	return async (dispatch, getState) => {
 		const { userId } = getState().auth
-		const response = await streamyApi.post('/streams/new', {
+		const response = await docbookApi.post('/documents/new', {
 			...formValues,
 			userId
 		})
 		dispatch({
-			type: CREATE_STREAM,
+			type: CREATE_DOCUMENT,
 			payload: response.data
 		})
 		history.push('/')
 	}
 }
 
-export const fetchStreams = () => {
+export const fetchDocuments = () => {
 	return async dispatch => {
-		const response = await streamyApi.get('/streams')
+		const response = await docbookApi.get('/documents')
 		dispatch({
-			type: FETCH_STREAMS,
+			type: FETCH_DOCUMENTS,
 			payload: response.data
 		})
 	}
 }
 
-export const fetchStream = id => {
+export const fetchDocument = id => {
 	return async dispatch => {
-		const response = await streamyApi.get(`/streams/${id}`)
+		const response = await docbookApi.get(`/documents/${id}`)
 		dispatch({
-			type: FETCH_STREAM,
+			type: FETCH_DOCUMENT,
 			payload: response.data
 		})
 	}
 }
 
-export const editStream = id => {
+export const editDocument = id => {
 	return async dispatch => {
-		const response = await streamyApi.put(`/streams/${id}`)
+		const response = await docbookApi.put(`/documents/${id}`)
 		dispatch({
-			type: EDIT_STREAM,
+			type: EDIT_DOCUMENT,
 			payload: response.data
 		})
 	}
 }
 
-export const deleteStream = id => {
+export const deleteDocument = id => {
 	return async dispatch => {
-		await streamyApi.delete(`/streams/${id}`)
+		await docbookApi.delete(`/documents/${id}`)
 		dispatch({
-			type: DELETE_STREAM,
+			type: DELETE_DOCUMENT,
 			payload: id
 		})
 	}

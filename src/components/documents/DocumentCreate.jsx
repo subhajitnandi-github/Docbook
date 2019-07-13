@@ -2,9 +2,9 @@ import React from 'react'
 import { Field, reduxForm } from 'redux-form'
 import { connect } from 'react-redux'
 
-import { createStream } from '../../actions'
+import { createDocument } from '../../actions'
 
-class StreamCreate extends React.Component {
+class DocumentCreate extends React.Component {
 	renderError({ touched, error }) {
 		if (touched && error) {
 			return <small className="form-text text-danger">{error}</small>
@@ -34,7 +34,7 @@ class StreamCreate extends React.Component {
 	}
 
 	onSubmit = formValues => {
-		this.props.createStream(formValues)
+		this.props.createDocument(formValues)
 	}
 
 	render() {
@@ -74,11 +74,11 @@ const validate = formValues => {
 }
 
 const formWrapped = reduxForm({
-	form: 'streamCreate',
+	form: 'documentCreate',
 	validate
-})(StreamCreate)
+})(DocumentCreate)
 
 export default connect(
 	null,
-	{ createStream }
+	{ createDocument }
 )(formWrapped)

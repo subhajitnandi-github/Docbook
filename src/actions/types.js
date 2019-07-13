@@ -1,7 +1,7 @@
-export const SIGN_IN = 'SIGN_IN';
-export const SIGN_OUT = 'SIGN_OUT';
-export const CREATE_STREAM = 'CREATE_STREAM';
-export const FETCH_STREAM = 'FETCH_STREAM';
-export const EDIT_STREAM = 'EDIT_STREAM';
-export const DELETE_STREAM = 'DELETE_STREAM';
-export const FETCH_STREAMS = 'FETCH_STREAMS';
+export const SIGN_IN = 'SIGN_IN'
+export const SIGN_OUT = 'SIGN_OUT'
+export const CREATE_DOCUMENT = 'CREATE_DOCUMENT'
+export const FETCH_DOCUMENT = 'FETCH_DOCUMENT'
+export const EDIT_DOCUMENT = 'EDIT_DOCUMENT'
+export const DELETE_DOCUMENT = 'DELETE_DOCUMENT'
+export const FETCH_DOCUMENTS = 'FETCH_DOCUMENTS'

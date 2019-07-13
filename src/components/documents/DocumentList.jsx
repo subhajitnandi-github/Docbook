@@ -1,17 +1,17 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { fetchStreams } from '../../actions'
+import { fetchDocuments } from '../../actions'
 
-class StreamList extends React.Component {
+class DocumentList extends React.Component {
 	componentDidMount() {
-		this.props.fetchStreams()
+		this.props.fetchDocuments()
 	}
 
-	renderAdmin(stream) {
+	renderAdmin(document) {
 		return (
 			<div className="col-md-6">
-				<Link to={`/streams/edit/${stream._id}`} className="btn btn-outline-info px-4 mx-2">
+				<Link to={`/documents/edit/${document._id}`} className="btn btn-outline-info px-4 mx-2">
 					Edit
 				</Link>
 				<button type="button" className="btn btn-outline-danger px-3 mx-2">
@@ -22,25 +22,25 @@ class StreamList extends React.Component {
 	}
 
 	renderList() {
-		return this.props.streams.map(stream => {
+		return this.props.documents.map(document => {
 			const { isSignedIn, currentUserId } = this.props
-			if (isSignedIn && currentUserId === stream.userId) {
+			if (isSignedIn && currentUserId === document.userId) {
 				return (
-					<div className="shadow list-group-item mt-4 col-10 col-md-7" key={stream._id}>
+					<div className="shadow list-group-item mt-4 col-10 col-md-7" key={document._id}>
 						<div className="row justify-content-center align-items-center px-4">
 							<div className="col-md-6">
-								<h5>{stream.title}</h5>
-								<p>{stream.description}</p>
+								<h5>{document.title}</h5>
+								<p>{document.description}</p>
 							</div>
-							{this.renderAdmin(stream)}
+							{this.renderAdmin(document)}
 						</div>
 					</div>
 				)
 			} else {
 				return (
-					<div className="shadow list-group-item mt-4 col-10 col-md-7 px-5" key={stream._id}>
-						<h5>{stream.title}</h5>
-						<p>{stream.description}</p>
+					<div className="shadow list-group-item mt-4 col-10 col-md-7 px-5" key={document._id}>
+						<h5>{document.title}</h5>
+						<p>{document.description}</p>
 					</div>
 				)
 			}
@@ -58,7 +58,7 @@ class StreamList extends React.Component {
 
 const mapStateToProps = state => {
 	return {
-		streams: Object.values(state.streams),
+		documents: Object.values(state.documents),
 		isSignedIn: state.auth.isSignedIn,
 		currentUserId: state.auth.userId
 	}
@@ -66,5 +66,5 @@ const mapStateToProps = state => {
 
 export default connect(
 	mapStateToProps,
-	{ fetchStreams }
-)(StreamList)
+	{ fetchDocuments }
+)(DocumentList)

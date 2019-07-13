@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
 import { Router, Route } from 'react-router-dom'
 
-import StreamCreate from './streams/StreamCreate'
-import StreamEdit from './streams/StreamEdit'
-import StreamList from './streams/StreamList'
-import StreamShow from './streams/StreamShow'
-import StreamDelete from './streams/StreamDelete'
+import DocumentCreate from './documents/DocumentCreate'
+import DocumentEdit from './documents/DocumentEdit'
+import DocumentList from './documents/DocumentList'
+import DocumentShow from './documents/DocumentShow'
+import DocumentDelete from './documents/DocumentDelete'
 import Header from './Header'
 import history from '../history'
 
@@ -16,11 +16,11 @@ class App extends Component {
 				<Router history={history}>
 					<Header />
 					<div>
-						<Route path="/" exact component={StreamList} />
-						<Route path="/streams/new" exact component={StreamCreate} />
-						<Route path="/streams/edit/:id" exact component={StreamEdit} />
-						<Route path="/streams/delete/:id" exact component={StreamDelete} />
-						<Route path="/streams/show/:id" exact component={StreamShow} />
+						<Route path="/" exact component={DocumentList} />
+						<Route path="/documents/new" exact component={DocumentCreate} />
+						<Route path="/documents/edit/:id" exact component={DocumentEdit} />
+						<Route path="/documents/delete/:id" exact component={DocumentDelete} />
+						<Route path="/documents/show/:id" exact component={DocumentShow} />
 					</div>
 				</Router>
 			</div>

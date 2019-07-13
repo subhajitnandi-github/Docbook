@@ -13,7 +13,7 @@ class Header extends React.Component {
 				<ul className="navbar-nav">
 					<li className="nav-item active">
 						<Link to="/streams/new" className="nav-link">
-							All Streams
+							Create Stream
 						</Link>
 					</li>
 				</ul>
