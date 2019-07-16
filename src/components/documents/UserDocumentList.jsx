@@ -7,8 +7,9 @@ import ModalContent from '../ModalContent'
 import Spinner from '../Spinner'
 import history from '../../history'
 import './Document.css'
+import SignInPrompt from '../SignInPrompt'
 
-class DocumentList extends React.Component {
+class UserDocumentList extends React.Component {
 	state = { modalShow: false }
 
 	componentDidMount() {
@@ -49,8 +50,8 @@ class DocumentList extends React.Component {
 
 	renderList() {
 		return this.props.documents.map(document => {
-			const { isSignedIn, currentUserId } = this.props
-			if (isSignedIn && currentUserId === document.userId) {
+			const { currentUserId } = this.props
+			if (currentUserId === document.userId) {
 				return (
 					<div className="shadow list-group-item mt-4 col-10 col-md-7" key={document._id}>
 						<div className="row justify-content-center align-items-center px-4">
@@ -66,29 +67,32 @@ class DocumentList extends React.Component {
 					</div>
 				)
 			} else {
-				return (
-					<div
-						className="shadow list-group-item mt-4 col-10 col-md-7 px-5 pointer"
-						key={document._id}
-						onClick={() => history.push(`/documents/${document._id}`)}
-					>
-						<h5 className="text-dark">{document.title}</h5>
-						<p>{document.description}</p>
-					</div>
-				)
+				return null
 			}
 		})
 	}
 
 	render() {
-		if (this.props.documents) {
-			return (
-				<div className="list-group">
-					<div className="row justify-content-center text-center mx-0">{this.renderList()}</div>
-				</div>
-			)
+		if (this.props.isSignedIn) {
+			if (this.props.documents) {
+				return (
+					<div>
+						<div className="row justify-content-center mx-0">
+							<div className="col-10 col-md-3">
+								<Link to="/documents/new" className="btn btn-primary btn-lg btn-block mt-5 mb-4">
+									Create Docling
+								</Link>
+							</div>
+						</div>
+						<div className="list-group">
+							<div className="row justify-content-center text-center mx-0">{this.renderList()}</div>
+						</div>
+					</div>
+				)
+			}
+			return <Spinner />
 		}
-		return <Spinner />
+		return <SignInPrompt />
 	}
 }
 
@@ -103,4 +107,4 @@ const mapStateToProps = state => {
 export default connect(
 	mapStateToProps,
 	{ fetchDocuments, deleteDocument }
-)(DocumentList)
+)(UserDocumentList)

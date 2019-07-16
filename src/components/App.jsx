@@ -1,13 +1,15 @@
 import React, { Component } from 'react'
-import { Router, Route } from 'react-router-dom'
+import { Router, Route, Switch } from 'react-router-dom'
 
 import DocumentCreate from './documents/DocumentCreate'
 import DocumentEdit from './documents/DocumentEdit'
 import DocumentList from './documents/DocumentList'
+import UserDocumentList from '../components/documents/UserDocumentList'
 import DocumentShow from './documents/DocumentShow'
-import DocumentDelete from './documents/DocumentDelete'
+import Error from './Error'
 import Header from './Header'
 import history from '../history'
+import Footer from './Footer'
 
 class App extends Component {
 	render() {
@@ -16,12 +18,16 @@ class App extends Component {
 				<Router history={history}>
 					<Header />
 					<div>
-						<Route path="/" exact component={DocumentList} />
-						<Route path="/documents/new" exact component={DocumentCreate} />
-						<Route path="/documents/edit/:id" exact component={DocumentEdit} />
-						<Route path="/documents/delete/:id" exact component={DocumentDelete} />
-						<Route path="/documents/show/:id" exact component={DocumentShow} />
+						<Switch>
+							<Route path="/" exact component={DocumentList} />
+							<Route path="/my_documents" exact component={UserDocumentList} />
+							<Route path="/documents/new" exact component={DocumentCreate} />
+							<Route path="/documents/edit/:id" exact component={DocumentEdit} />
+							<Route path="/documents/:id" exact component={DocumentShow} />
+							<Route path="/error" exact component={Error} />
+						</Switch>
 					</div>
+					<Footer />
 				</Router>
 			</div>
 		)

@@ -1,8 +1,12 @@
 import React from 'react'
 import { Field, reduxForm } from 'redux-form'
 import { connect } from 'react-redux'
+import Dropzone from 'react-dropzone'
 
 import { createDocument } from '../../actions'
+import { capitalizeTitle } from '../../helperFunctions'
+import './Document.css'
+import SignInPrompt from '../SignInPrompt'
 
 class DocumentCreate extends React.Component {
 	renderError({ touched, error }) {
@@ -33,15 +37,57 @@ class DocumentCreate extends React.Component {
 		)
 	}
 
+	renderDropzoneInput = ({ input, meta }) => {
+		const file = input.value[0]
+		const className = `form-control ${meta.error && meta.touched ? 'border-danger' : ''}`
+
+		return (
+			<div className="mt-5">
+				<Dropzone name={input.name} onDrop={(filesToUpload, e) => input.onChange(filesToUpload)}>
+					{({ getRootProps, getInputProps }) => (
+						<section className={`${className} w-75 text-center h-100 mx-auto bg-info text-white`}>
+							<div {...getRootProps()}>
+								<input {...getInputProps()} />
+								<h5>{file ? file.name : `Drag 'n' drop, or click to select file`}</h5>
+							</div>
+						</section>
+					)}
+				</Dropzone>
+
+				{this.renderError(meta)}
+			</div>
+		)
+	}
+
 	onSubmit = formValues => {
-		this.props.createDocument(formValues)
+		var body = new FormData()
+		// Object.keys(formValues).forEach(key => {
+		// 	body.append(key, formValues[key])
+		// })
+
+		body.append('file', formValues.file[0])
+		body.append('title', capitalizeTitle(formValues.title))
+		body.append(
+			'description',
+			`${formValues.description[0].toUpperCase()}${formValues.description.substring(1)}`
+		)
+
+		// let bodyValues = []
+
+		// for (let i of body.values()) {
+		// 	bodyValues.push(i)
+		// }
+
+		// console.log(bodyValues, formValues)
+
+		this.props.createDocument(body)
 	}
 
 	render() {
-		return (
-			<div className="grid">
+		if (this.props.isSignedIn) {
+			return (
 				<div className="row justify-content-center mx-0">
-					<div className="col-10 col-md-7">
+					<div className="col-10 col-md-6">
 						<form onSubmit={this.props.handleSubmit(this.onSubmit)}>
 							<div className="form-group">
 								<Field name="title" component={this.renderInput} label="Enter title" />
@@ -50,27 +96,41 @@ class DocumentCreate extends React.Component {
 									component={this.renderTextArea}
 									label="Enter description"
 								/>
+								<Field name="file" component={this.renderDropzoneInput} />
 							</div>
-							<button type="submit" className="btn btn-primary btn-lg mt-2 px-5">
-								Submit
+							<button type="submit" className="btn btn-success btn-lg mt-4 px-5 responsive-width">
+								Create
 							</button>
 						</form>
 					</div>
 				</div>
-			</div>
-		)
+			)
+		} else {
+			return <SignInPrompt />
+		}
 	}
 }
 
 const validate = formValues => {
 	const errors = {}
+
 	if (!formValues.title) {
 		errors.title = 'Please enter a title.'
 	}
 	if (!formValues.description) {
 		errors.description = 'Please enter a description.'
 	}
+	if (!formValues.file || formValues.file[0].name.indexOf('.pdf') === -1) {
+		errors.file = 'Please select a valid file to upload'
+	}
+
 	return errors
+}
+
+const mapStateToProps = state => {
+	return {
+		isSignedIn: state.auth.isSignedIn
+	}
 }
 
 const formWrapped = reduxForm({
@@ -79,6 +139,6 @@ const formWrapped = reduxForm({
 })(DocumentCreate)
 
 export default connect(
-	null,
+	mapStateToProps,
 	{ createDocument }
 )(formWrapped)
