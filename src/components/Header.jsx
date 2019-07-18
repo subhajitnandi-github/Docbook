@@ -12,7 +12,7 @@ class Header extends React.Component {
 					DOCBOOK
 				</Link>
 				<button
-					className="navbar-toggler"
+					className="navbar-toggler mr-4 ml-0"
 					data-toggle="collapse"
 					data-target="#navLinks"
 					aria-label="Toggle Navigation"
@@ -34,7 +34,7 @@ class Header extends React.Component {
 							</a>
 						</li>
 						<li className="nav-item px-md-4">
-							<a href="#" className="nav-link">
+							<a href="https://kristency.github.io/portfolio" className="nav-link">
 								<i className="fas fa-user-tie fa-lg mr-2" />
 								PortFolio
 							</a>

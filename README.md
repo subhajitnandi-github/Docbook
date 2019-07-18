@@ -4,9 +4,9 @@ Read an interesting article :page_with_curl: or research paper or white paper an
 
 #### :computer: Currently deployed at [docb.herokuapp.com](http://docb.herokuapp.com)​
 
-> :warning: Please note that as of now it only supports sharing of **.pdf** files. The maximum size allowed is 5 MB.
+> :warning: Please note that as of now it only supports sharing of **.pdf** files. The maximum size allowed is 1 MB.
 
-
+---
 
 * :monorail: [Run Locally](#user-content-run-locally)​
 * :grey_question: [Terminology](#user-content-terminology)
@@ -44,7 +44,7 @@ Your app should be up and running on `localhost:3000`
 
 ## Terminology
 
-:round_pushpin: **Docling - **​Its similar to a post on any social media site. It contains the respective creator's name, title of the post , its description and a timestamp.
+:round_pushpin: **Docling -** ​Its similar to a post on any social media site. It contains the respective creator's name, title of the post , its description and a timestamp.
 
 
 
@@ -76,7 +76,7 @@ This project is built with **React** and bootstrapped by [Create React App](http
 
 #### State Management
 
-For global state management, **Redux** is being used along with **redux-thunk** to deal with asynchronous action creators while **axios** handles REST API calls.
+For global state management, **Redux** is being used along with **redux-thunk** to deal with asynchronous action creators while **axios** handles REST API calls. For monitoring and debugging the state, [Redux Dev Tools](https://github.com/zalmoxisus/redux-devtools-extension) works great.
 
 #### Responsive Styling
 
@@ -112,6 +112,7 @@ Deployed on **heroku** using the [mars/create-react-app](https://github.com/mars
 
 ## To-Dos
 
+- [x] Add file drag 'n' drop support
 - [ ] Use Sagas instead of Redux-thunk
 - [ ] Convert class based components into Hooks
 - [ ] Add bookmark, share and comment features
@@ -120,7 +121,7 @@ Deployed on **heroku** using the [mars/create-react-app](https://github.com/mars
 
 ## Miscellaneous
 
-As I already told [above](user-content-api) about the mistake of pushing the private AWS keys on Github, it was very difficult to clean this mess because even if I removed the keys and push a new commit, the old commits would still be showing the keys due to git's tracking history. A program called [BFG Repo-Cleaner](https://rtyley.github.io/bfg-repo-cleaner/) (basically a .jar file) really helped me in this case. You can read the instructions on its website. I am just mentioning it here so that if anybody gets stuck in a similar situation like this, he/she can easily refer to this.
+As I already told [above](user-content-api) about the mistake of pushing the private AWS keys on Github, it was very difficult to clean this mess because even if I removed the keys and push a new commit, the old commits would still be showing the keys due to git's tracking history. A program called [BFG Repo-Cleaner](https://rtyley.github.io/bfg-repo-cleaner/) (basically a .jar file) really helped me in this case. You can read the instructions on its website. I am just mentioning it here so that if anybody gets stuck in a similar situation like this, he/she can easily refer to it.
 
 
 
