@@ -37,9 +37,7 @@ class UserDocumentList extends React.Component {
 				<ModalContent
 					show={this.state.modalShow}
 					onHide={this.modalClose}
-					title={
-						this.state.currentlySelectedDocument ? this.state.currentlySelectedDocument.title : null
-					}
+					title={this.state.currentlySelectedDocument ? this.state.currentlySelectedDocument.title : null}
 					message="Are you sure you want to delete this docling ?"
 					warning="Please note that this will permanently delete your docling along with all the files associated with it. Those users who have bookmarked your docling will be affected."
 					onConfirm={() => this.props.deleteDocument(this.state.currentlySelectedDocument._id)}
@@ -49,16 +47,13 @@ class UserDocumentList extends React.Component {
 	}
 
 	renderList() {
-		return this.props.documents.map(document => {
+		return this.props.documents.map((document) => {
 			const { currentUserId } = this.props
 			if (currentUserId === document.userId) {
 				return (
 					<div className="shadow list-group-item mt-4 col-10 col-md-7" key={document._id}>
 						<div className="row justify-content-center align-items-center px-4">
-							<div
-								className="col-md-6 pointer"
-								onClick={() => history.push(`/documents/${document._id}`)}
-							>
+							<div className="col-md-6 pointer" onClick={() => history.push(`/documents/${document._id}`)}>
 								<h5 className="text-dark">{document.title}</h5>
 								<p>{document.description}</p>
 							</div>
@@ -74,7 +69,7 @@ class UserDocumentList extends React.Component {
 
 	render() {
 		if (this.props.isSignedIn) {
-			if (this.props.documents) {
+			if (this.props.documents.length > 0) {
 				return (
 					<div>
 						<div className="row justify-content-center mx-0">
@@ -96,15 +91,12 @@ class UserDocumentList extends React.Component {
 	}
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
 	return {
 		documents: Object.values(state.documents),
 		isSignedIn: state.auth.isSignedIn,
-		currentUserId: state.auth.userId
+		currentUserId: state.auth.userId,
 	}
 }
 
-export default connect(
-	mapStateToProps,
-	{ fetchDocuments, deleteDocument }
-)(UserDocumentList)
+export default connect(mapStateToProps, { fetchDocuments, deleteDocument })(UserDocumentList)
